@@ -1,0 +1,349 @@
+/*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+
+/* Custom default button */
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritence from `body` */
+  background-color: #fff;
+  border: 1px solid #fff;
+}
+
+
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 100%;
+  
+}
+body {
+  background-color:rgba(0,0,0,.1);
+  text-align: center;
+  
+}
+a {
+  text-decoration: none;
+}
+
+.color1 {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  background-color: #34495E;
+  width: 100%;
+  height: 130%; /* For at least Firefox */
+  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+}
+
+
+.btn-xt {
+  color:#34495E;
+  border-radius: 5px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top:10px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: none;
+  transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.5s ease 0s;
+  text-align: center;
+  background: none repeat scroll 0 0 #f9f9f9;
+}
+
+.frame-buy {
+    border-color: #C2C5C7;
+    border-style: solid;
+    border-width: 1px;
+    border-top-width:8px;
+    border-top-color: #46b98a;
+    margin: auto;
+}
+.text-buy {
+  padding: 18px;
+  margin: 20px;
+  font-weight: 600;
+  text-align: left;
+  font-size: 22px;
+  color: #454545;
+  font-size: 16px;
+  margin-bottom: 45px
+}
+
+a.btn-xt:hover {
+  background: none repeat scroll 0 0 #46b98a;
+  text-decoration: none;
+}
+a.btn-xt:focus {
+  background: none repeat scroll 0 0 #36a97a;
+  text-decoration: none;
+  color: #34495E;
+}
+
+
+/* Extra markup and styles for table-esque vertical and horizontal centering */
+.site-wrapper {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,.1);
+  background-color: #34495E;
+  display: table;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  -webkit-box-shadow: inset 0 0 200px rgba(0,0,0,.8);
+          
+}
+.site-wrapper-inner {
+  margin-top:150px;
+}
+.flex {
+  display: flex;
+  flex-direcrion:row;
+}
+
+.main-color {
+  background: #34495E;
+  color: #eee;
+}
+
+.flex-buy {
+  display: flex;
+  flex-direcrion:row;
+  margin: 0px;
+  padding: 0px;
+  
+}
+.span-buy {
+  margin-top: 26px;
+  padding-left:10px;
+  font-size: 14px;
+  color: #9e9e9e;
+}
+
+.cover-container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Padding for spacing */
+.inner {
+  background-color: #34495E;
+}
+.bg-clouds {
+  background-color: #ecf0f1;
+}
+.span1 {
+    font-size: 19px;
+    color: #7f8c8d;
+    text-align: justify;
+}
+.span2 {
+    font-size: 17px;
+    color: #7f8c8d;
+}
+.headers{
+  text-align: center;
+  color:#656;
+}
+.margin-md{
+  margin: 60px;
+}
+.margin-sm{
+  margin-left: 20px;
+  padding-top:18px;
+}
+.margin-left-sm{
+  margin-left: 49px;
+}
+.margin-all-sm {
+  margin: 28px;
+}
+.color-crem {
+  background: #EFF1F2;
+}
+.color-white {
+  background: #fff;
+}
+.zero-50 {
+  height: 50px;
+}
+.zero-20 {
+  height: 20px;
+}
+.zero-120 {
+  height: 120px;
+}
+.zero-240 {
+  height: 240px;
+}
+.img-center {
+  align: center;
+}
+featured. {
+ vertical-align:middle;
+}
+
+/*
+ * Header
+ */
+.masthead-brand {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.masthead-nav > li {
+  display: inline-block;
+}
+.masthead-nav > li + li {
+  margin-left: 20px;
+}
+.masthead-nav > li > a {
+  padding-right: 0;
+  padding-left: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: rgba(255,255,255,.75);
+  border-bottom: 2px solid transparent;
+}
+.masthead-nav > li > a:hover,
+.masthead-nav > li > a:focus {
+  background-color: transparent;
+  border-bottom-color: #a9a9a9;
+  border-bottom-color: rgba(255,255,255,.25);
+}
+.masthead-nav > .active > a,
+.masthead-nav > .active > a:hover,
+.masthead-nav > .active > a:focus {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+@media (min-width: 768px) {
+  .masthead-brand {
+    float: left;
+  }
+  .masthead-nav {
+    float: right;
+  }
+}
+
+
+/*
+ * Cover
+ */
+
+.cover {
+  padding: 0 20px;
+}
+.cover .btn-lg {
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.shape {
+    left: 50%;
+    right: 50%;
+    height: 100px;
+    width:160px;
+    border-color: rgb(255, 255, 255);
+    border-style: solid;
+    border-width: 8px;
+    margin: auto;
+}
+
+
+/*
+ * Footer
+ */
+
+
+
+
+/*
+ * Affix and center
+ */
+
+@media (min-width: 768px) {
+  /* Pull out the header and footer */
+  .masthead {
+    position: absolute;
+    top: 0;
+  }
+  .mastfoot {
+    position: fixed;
+    bottom: 0;
+  }
+  /* Start the vertical centering */
+  .site-wrapper-inner {
+    vertical-align: middle;
+  }
+  /* Handle the widths */
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 100%; /* Must be percentage or pixels for horizontal alignment */
+  }
+}
+
+@media (min-width: 992px) {
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 700px;
+  }
+}
+
+/*modal*/
+.lock{
+  overflow: hidden;
+  display: none;
+}
+
+.modal-shim {
+  position: fixed;
+  bottom: 0;top: 0;left: 0;right: 0;
+  overflow: auto;
+  background: rgba(0,0,0,0.7);
+}
+
+.modal-m {
+  margin: auto;
+  margin-top:100px;
+  background: #fff;
+  border-radius: 5px;
+  width: 355px;
+  color:#34495E;
+  text-align: left;
+  font-size: 12px;
+  font-weight: bold;
+}
+.form-error {
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 15px;
+  padding-left: 15px;
+  color: #fff;
+  background: #942C2C;
+  margin: 20px;
+}
