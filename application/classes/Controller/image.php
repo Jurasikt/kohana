@@ -4,7 +4,7 @@ class Controller_Image extends Controller {
 
 	public function action_index()
 	{
-		if (Cookie::get('user') == 'admin') {
+		if (Model::factory('Users')->oath()) {
 			$img = Model::factory('Photo')->rand(3);
 			$all = Model::factory('Photo')->get_all();
 

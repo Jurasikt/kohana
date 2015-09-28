@@ -2,6 +2,12 @@
 $i   = URL::site().'public/img/m_';
 $s   = URL::site().'public/img/s_';
 $len = round(count($all)/2);
+$i1 = isset($img[0]['file'])?$i.$img[0]['file']:'';
+$i2 = isset($img[1]['file'])?$i.$img[1]['file']:'';
+$i3 = isset($img[2]['file'])?$i.$img[2]['file']:'';
+$t1 = isset($img[0]['title'])?$img[0]['title']:'';
+$t2 = isset($img[1]['title'])?$img[1]['title']:'';
+$t3 = isset($img[2]['title'])?$img[2]['title']:''; // до дед лайна 1 час
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,24 +74,24 @@ $len = round(count($all)/2);
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="<?=$i.$img[0]['file']?>" alt="...">
+      <img src="<?=$i1?>" alt="...">
       <div class="carousel-title carousel-caption">
         <h2>Случайное фото</h2>
-        <h3><?=$img[0]['title']?></h3>
+        <h3><?=$t1?></h3>
       </div>
     </div>
     <div class="item">
-      <img src="<?=$i.$img[1]['file']?>" alt="...">
+      <img src="<?=$i2?>" alt="...">
       <div class="carousel-title carousel-caption">
         <h2>Случайное фото</h2>
-        <h3><?=$img[1]['title']?></h3>
+        <h3><?=$t2?></h3>
       </div>
     </div>
     <div class="item">
-      <img src="<?=$i.$img[2]['file']?>" alt="...">
+      <img src="<?=$i3?>" alt="...">
       <div class="carousel-title carousel-caption">
         <h2>Случайное фото</h2>
-        <h3><?=$img[2]['title']?></h3>
+        <h3><?=$t3?></h3>
       </div>
     </div>
   </div>

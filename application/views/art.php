@@ -40,7 +40,7 @@
             <button  class="btn btn-default">Submit</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
-            <li ><a href="#">Write articles</a></li>
+            <li ><a href="<?=URL::base()?>articles/write">Write articles</a></li>
 
           </ul>
         </div>

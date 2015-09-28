@@ -6,35 +6,47 @@ class Controller_Articles extends Controller {
 
 
 	public function action_index()
-	{
-		$all = Model::factory('Article')->get_all();
-		$this->response->body(View::factory('art',array(
-				'all'=> $all,
-			)));
+	{	
+		if (Model::factory('Users')->oath()) {
+			$all = Model::factory('Article')->get_all();
+			$this->response->body(View::factory('art',array(
+					'all'=> $all,
+				)));			
+		} else {
+			$this->response->body('401 Access allowed only for registered user');
+		}
+
 	}
 
 
 	public function action_write()
 	{
-		$this->response->body(View::factory('wart'));
+		if (Model::factory('Users')->oath()) {
+
+			$this->response->body(View::factory('wart'));
+		} else {
+			$this->response->body('401 Access allowed only for registered user');
+		}
 	}
 
 	public function action_read()
 	{
-		if (isset($_GET['id'])) {
+		if (isset($_GET['id']) && Model::factory('Users')->oath()) {
 			$arr = Model::factory('Article')->get_text($_GET['id']);
 			if ($arr == false) {
 				$this->response->body('Такой статьи не существует :D');
 			} else {
 				$this->response->body(View::factory('rart',$arr));
 			}
+		} else {
+			$this->response->body('401 Access allowed only for registered user');
 		}
 	}
 
 
 	public function action_save()
 	{	
-		if (isset($_POST['title']) && isset($_POST['text'])) {
+		if (isset($_POST['title']) && isset($_POST['text']) && Model::factory('Users')->oath()) {
 			if (trim($_POST['title']) == '' || trim($_POST['text']) == '') {
 				$this->response->body('Размер статьи должен быть больше 1 символа <br>'.
 					'нету времени делать ajax');
@@ -55,7 +67,7 @@ class Controller_Articles extends Controller {
 
 	public function action_edit()
 	{
-		if(isset($_POST)){
+		if(isset($_POST) && Model::factory('Users')->oath()){
 			if(isset($_POST['edit']) && isset($_POST['id'])) {
 				$art = Model::factory('Article')->get_text($_POST['id']);
 				$this->response->body(View::factory('wart',array(
@@ -68,7 +80,15 @@ class Controller_Articles extends Controller {
 				Model::factory('Article')->delete($_POST['id']);
 				$this->redirect($this->_site.'/articles');
 			}
+		} else {
+			$this->response->body('401 Access allowed only for registered user');
 		}
 	}
+
+
+    public function action_test()
+    {
+        var_dump(Model::factory('Users')->oath());
+    }
 
 } 

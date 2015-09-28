@@ -66,6 +66,7 @@ class Model_Photo extends Model
 
     public function get_all()
     {
+        $tmp = array();
         $sql = "SELECT * FROM ".$this->_table." WHERE 1";
         $arr = DB::query(Database::SELECT, $sql)->execute();
         for ($i=0; $i < count($arr) ; $i++) { 
@@ -99,6 +100,7 @@ class Model_Photo extends Model
 
     public function rand($limit) 
     {
+        $tmp = array();
         $sql = "SELECT * FROM ".$this->_table.
         " WHERE 1 ORDER BY rand() LIMIT ".$limit;
         $arr = DB::query(Database::SELECT,$sql)->execute();

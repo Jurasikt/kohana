@@ -21,7 +21,7 @@
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="<?=URL::base()?>image">Image</a></li>
                 <li><a href="<?=URL::base()?>upload">Upload Image</a></li>
-                <li><a href="#">Articles</a></li>
+                <li><a href="<?=URL::base()?>articles">Articles</a></li>
               </ul>
             </nav>
           </div>
@@ -36,8 +36,8 @@
             
           
           <div class="inner cover cover-container">
-            <h1 class="cover-heading">Example.</h1>
-            <p class="lead">Для того чтобы что то увидеть залогинетесь.</p>
+            <h1 class="cover-heading">Мои путешествия.</h1>
+            <p class="lead">Для того чтобы, что-то увидеть авторизуйтесь.</p>
           </div>
       </div>
       
@@ -63,8 +63,8 @@
           <input type="password" class="form-control" name = "password" placeholder="Password">
         </div>
         <div class="flex">
-          <div class="btn btn-success btn-md margin-left-sm" id = "btn-sign">sumbmit</div>
-          <div class="btn btn-danger btn-md margin-left-sm cancel1" >cancel</div>
+          <div class="btn btn-success btn-md margin-left-sm" id = "btn-sign">Login</div>
+          <div class="btn btn-danger btn-md margin-left-sm cancel1" >Cancel</div>
         </div>
         <div class="zero-20"></div>
       </form>
@@ -95,7 +95,9 @@ $('#btn-sign').click(function() {
         $('.form-error').append('<li> '+json.err[i]+'</li>');
       };      
     } else {
-      window.location.replace(img);
+      $(".lock").hide();
+      $('body').css('overflow','visible');
+      //window.location.replace(img);
     }
   },'json');
 });

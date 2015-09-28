@@ -15,9 +15,7 @@ class Controller_Ajax extends Controller {
 		} else {
 			$error[] = 'Incorect passsword';	
 		}
-		if ($log) {
-			Cookie::set('user', 'admin',314159);
-		}
+		Model::factory('Users')->setcookie();
 		$this->response->headers('Content-Type','application/json');
 		$a = (object)(array("success"=>$log,"err"=>$error));
 		$this->response->body(json_encode($a));

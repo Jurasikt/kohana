@@ -29,6 +29,7 @@ class Model_Article extends Model
     */
     public function get_all()
     {
+        $tmp = array();
         $sql = "SELECT * FROM ".$this->_table." WHERE 1";
         $arr = DB::query(Database::SELECT, $sql)->execute();
         for ($i=0; $i < count($arr) ; $i++) { 

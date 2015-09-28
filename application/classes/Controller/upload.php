@@ -5,15 +5,18 @@ class Controller_Upload extends Controller {
 
     public function action_index()
     {
-        if (Cookie::get('user') == 'admin') $log = true;
-        else $log = false;
-        $this->response->body(View::factory('upl'));
+        if (Model::factory('Users')->oath()) {
+            $this->response->body(View::factory('upl'));
+        } else {
+            $this->response->body('401 Access allowed only for registered users');
+        }
+        
     }
 
     public function action_next() 
     {
-        //if (isset($_FILES['file']['tmp_name'])) var_dump($_FILES['file']['tmp_name']);
-        if (isset($_FILES['file']['tmp_name']) && Cookie::get('user') == 'admin') {
+        
+        if (isset($_FILES['file']['tmp_name']) && Model::factory('Users')->oath()) {
             $name = array();
             for ($i=0; $i < count($_FILES['file']['tmp_name']) ; $i++) { 
                 $tmp = Model::factory('Photo')->load($_FILES['file']['tmp_name'][$i]);
@@ -27,7 +30,7 @@ class Controller_Upload extends Controller {
 
     public function action_finish()
     {
-        if (isset($_POST) && Cookie::get('user') == 'admin') {
+        if (isset($_POST) && Model::factory('Users')->oath()) {
             $name = array();
             foreach ($_POST as $key => $value) {
                 $key = preg_replace('/[_]/', '.',$key);

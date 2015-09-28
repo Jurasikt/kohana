@@ -4,10 +4,8 @@ class Controller_Welcome extends Controller {
 
 	public function action_index()
 	{
-		if (Cookie::get('user') == 'admin') $log = true;
-		else $log = false;
 		$this->response->body(View::factory('main',array(
-			'login' => $log,
+			'login' => Model::factory('Users')->oath(),
 			)));
 	}
 
