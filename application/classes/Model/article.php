@@ -11,7 +11,7 @@ class Model_Article extends Model
     */
     public function save_all($title='',$text='')
     {
-        $date = date("Y_m_d H:i:s");
+        $date = date("Y-m-d H:i:s");
         $sql  = "INSERT INTO ".$this->_table.
         " (text, title, date, user) VALUES (:text, :title, '$date',1)";
         DB::query(Database::INSERT,$sql)
@@ -33,10 +33,7 @@ class Model_Article extends Model
         $sql = "SELECT * FROM ".$this->_table." WHERE 1";
         $arr = DB::query(Database::SELECT, $sql)->execute();
         for ($i=0; $i < count($arr) ; $i++) { 
-            $tmp[] = array(
-                    'title'=> $arr[$i]['title'],
-                    'id'   => $arr[$i]['id']
-                );
+            $tmp[$arr[$i]['id']] = $arr[$i]['title'];
         }
         return $tmp;
     }

@@ -21,16 +21,16 @@ $url = URL::base().'public/img/s_';
       <h1>Описание для фоток</h1>
     </div>
     <form class="form-horizontal" action="<?=URL::base()?>upload/finish" method="POST">
-    <?php  for ($i=0; $i < count($name); $i++) { ?>
+    <?php  foreach ($name as $value):?>
       <div class="form-group">
         <div class="col-md-3">
-          <img src=<?=$url.$name[$i]?> class="img-thumbnail">
+          <img src=<?=$url.$value?> class="img-thumbnail">
         </div>
         <div class="col-sm-3">
-          <textarea class="form-control" rows="3" name=<?=$name[$i]?>></textarea>
+          <textarea class="form-control" rows="3" name=<?=$value?>></textarea>
         </div>
       </div>
-    <?php }?>
+    <?php endforeach;?>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-3">
         <button type="submit" class="btn btn-default">Завершить</button>

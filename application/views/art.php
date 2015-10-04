@@ -55,11 +55,11 @@
 <div class="container">
   <div class="col-md-2"></div>
   <div class="col-md-8">
-  <?php for ($i=0; $i < count($all); $i++): ?>
+  <?php foreach ($all as $id => $title) :?>
     <li>
-      <a href="articles/read?id=<?=$all[$i]['id']?>"><?=$all[$i]['title']?></a>
+      <a href="articles/read?id=<?=$id?>"><?=$title?></a>
     </li>
-  <?php endfor; ?>
+  <?php endforeach; ?>
   </div>
   <div class="col-md-2"></div>
 </div>

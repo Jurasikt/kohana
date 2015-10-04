@@ -2,12 +2,7 @@
 $i   = URL::site().'public/img/m_';
 $s   = URL::site().'public/img/s_';
 $len = round(count($all)/2);
-$i1 = isset($img[0]['file'])?$i.$img[0]['file']:'';
-$i2 = isset($img[1]['file'])?$i.$img[1]['file']:'';
-$i3 = isset($img[2]['file'])?$i.$img[2]['file']:'';
-$t1 = isset($img[0]['title'])?$img[0]['title']:'';
-$t2 = isset($img[1]['title'])?$img[1]['title']:'';
-$t3 = isset($img[2]['title'])?$img[2]['title']:''; // до дед лайна 1 час
+$active = 'active';
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,27 +68,18 @@ $t3 = isset($img[2]['title'])?$img[2]['title']:''; // до дед лайна 1 �
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img src="<?=$i1?>" alt="...">
+  <?php foreach ($img as $key => $name) : ?>
+    <div class="item <?=$active?>">
+      <img src="<?=$i.$key?>">
       <div class="carousel-title carousel-caption">
         <h2>Случайное фото</h2>
-        <h3><?=$t1?></h3>
+        <h3><?=$name?></h3>
       </div>
     </div>
-    <div class="item">
-      <img src="<?=$i2?>" alt="...">
-      <div class="carousel-title carousel-caption">
-        <h2>Случайное фото</h2>
-        <h3><?=$t2?></h3>
-      </div>
-    </div>
-    <div class="item">
-      <img src="<?=$i3?>" alt="...">
-      <div class="carousel-title carousel-caption">
-        <h2>Случайное фото</h2>
-        <h3><?=$t3?></h3>
-      </div>
-    </div>
+  <?php 
+  if ($active == 'active') $active = '';
+  endforeach;
+  ?>
   </div>
 
   <!-- Controls -->
@@ -112,7 +98,7 @@ $t3 = isset($img[2]['title'])?$img[2]['title']:''; // до дед лайна 1 �
     <div class="headers">
       <h1>Мои отчеты о покатушках</h1>
     </div>
-    <?php for ($i=0; $i < $len; $i++) { ?>
+    <?php for ($i=0; $i < $len; $i++) : ?>
 
     <div class="row">
       <div class="col-md-6 headers">
@@ -124,7 +110,7 @@ $t3 = isset($img[2]['title'])?$img[2]['title']:''; // до дед лайна 1 �
         </div>
       </div>
 
-      <?php if (isset($all[2*$i+1])) { ?>
+      <?php if (isset($all[2*$i+1])) : ?>
       <div class="col-md-6 headers">
         <div class = "margin-all-sm">
           <img src="<?=$s.$all[$i*2+1]['file']?>" class = "img-rounded pnt">
@@ -133,9 +119,9 @@ $t3 = isset($img[2]['title'])?$img[2]['title']:''; // до дед лайна 1 �
           </div>
         </div>
       </div>
-      <?php }?>
+      <?php endif;?>
     </div>
-    <?php }?>
+    <?php endfor;?>
 
 
   </div>

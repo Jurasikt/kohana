@@ -48,8 +48,7 @@ class Controller_Articles extends Controller {
 	{	
 		if (isset($_POST['title']) && isset($_POST['text']) && Model::factory('Users')->oath()) {
 			if (trim($_POST['title']) == '' || trim($_POST['text']) == '') {
-				$this->response->body('Размер статьи должен быть больше 1 символа <br>'.
-					'нету времени делать ajax');
+				$this->response->body('Размер статьи должен быть больше 1 символа');
 				return false;
 			}
 			if (isset($_POST['id']) && $_POST['id'] != '') {
@@ -84,11 +83,5 @@ class Controller_Articles extends Controller {
 			$this->response->body('401 Access allowed only for registered user');
 		}
 	}
-
-
-    public function action_test()
-    {
-        var_dump(Model::factory('Users')->oath());
-    }
 
 } 
