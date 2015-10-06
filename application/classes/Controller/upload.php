@@ -8,7 +8,7 @@ class Controller_Upload extends Controller {
         if (Model::factory('Users')->oath()) {
             $this->response->body(View::factory('upl'));
         } else {
-            $this->response->body('401 Access allowed only for registered users');
+            throw new HTTP_Exception_401();
         }
         
     }
@@ -45,7 +45,7 @@ class Controller_Upload extends Controller {
             Model::factory('Photo')->finish_load($name);
             $this->redirect('http://localhost/kohana');
         } else {
-            $this->response->body('401 Access allowed only for registered users');
+            throw new HTTP_Exception_401();
         }
         
     }

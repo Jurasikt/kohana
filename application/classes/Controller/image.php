@@ -13,7 +13,7 @@ class Controller_Image extends Controller {
 				'all'=>$all,
 			)));			
 		} else {
-			$this->response->body('401 Access allowed only for registered user');
+			throw new HTTP_Exception_401();
 		}
 
 	}
