@@ -12,26 +12,26 @@ class Model_Photo extends Model
 
 
     /**
-    * осуществляет проверку загружаемого изображения на jpg(jpeg)
-    * по exif!!! копирует его в католог img, предварительно 
+    * осуществляет проверку загружаемого изображения на jpg(jpeg) если $exif == true
+    * копирует его в католог img, предварительно 
     * изменив размер до s - max(300*300) m  - max(800*800) схранив пропорции
-    * @param $file    string 
+    * @param $file    string  полное имя файла 
+    * @param $exif    bool    если true то проверка будет осуществляться по exif
     * @return         mixed new file name or false(boolean)
     */
-    public function load($file) 
+    public function load($file, $exif = true) 
     {
-        if (exif_imagetype($file) == 2) {
-            $name = Text::random('alnum',32).'.jpg';
-            $dir  = $_SERVER['DOCUMENT_ROOT'].URL::base().self::IMAGE_DIR;
-            Image::factory($file)
-                ->resize(300, 300, Image::AUTO)
-                ->save($dir.'s_'.$name);
-            Image::factory($file)
-                ->resize(800, 800, Image::AUTO)
-                ->save($dir.'m_'.$name);
-            return $name;
-        }
-        return false;
+        if ($exif && function_exists('exif_imagetype') && exif_imagetype($file) != 2)
+            return false;
+        $name = Text::random('alnum',32).'.jpg';
+        $dir  = DOCROOT.self::IMAGE_DIR;
+        Image::factory($file)
+            ->resize(300, 300, Image::AUTO)
+            ->save($dir.'s_'.$name);
+        Image::factory($file)
+            ->resize(800, 800, Image::AUTO)
+            ->save($dir.'m_'.$name);
+        return $name;
     }
 
 
@@ -41,10 +41,10 @@ class Model_Photo extends Model
         $tmp = array();
         $sql = "SELECT * FROM ".$this->_table." WHERE 1";
         $arr = DB::query(Database::SELECT, $sql)->execute();
-        for ($i=0; $i < count($arr) ; $i++) { 
+        foreach ($arr as $value) {
             $tmp[] = array(
-                'file' => $arr[$i]['file'],
-                'title'=> $arr[$i]['title']
+                'file' => Arr::get($value,'file',''),
+                'title'=> Arr::get($value,'title',''),
                 );
         }
         return $tmp;
@@ -57,14 +57,11 @@ class Model_Photo extends Model
     */
     public function finish_load($arr = array())
     {
-        $date  = date('Y-m-d H:i:s');
-        $sql   = "INSERT INTO tb_photo (title, date, file, user) VALUES (:title, '$date',:file,1)";
-        $query = DB::query(Database::INSERT, $sql)    
-            ->bind(':title', $title)    
-            ->bind(':file', $file); 
-        for ($i=0; $i < count($arr) ; $i++) { 
-            $title = $arr[$i]['title'];
-            $file  = $arr[$i]['file'];
+        $query = DB::insert($this->_table, array('title','date','file','user'))
+                    ->values(array(&$title, date("Y-m-d H:i:s"), &$file,1));
+        foreach ($arr as $value) {
+            $title = Arr::get($value,'title','');
+            $file  = Arr::get($value,'file','');
             $query->execute();
         }
     }

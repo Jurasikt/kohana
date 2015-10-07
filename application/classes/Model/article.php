@@ -11,16 +11,9 @@ class Model_Article extends Model
     */
     public function save_all($title='',$text='')
     {
-        $date = date("Y-m-d H:i:s");
-        $sql  = "INSERT INTO ".$this->_table.
-        " (text, title, date, user) VALUES (:text, :title, '$date',1)";
-        DB::query(Database::INSERT,$sql)
-            ->parameters(array(
-                ':text' =>$text,
-                ':title'=>$title,
-            ))
-        ->execute();
-
+        DB::insert($this->_table, array('text','title','user','date'))
+            ->values(array($text,$title,1,date("Y-m-d H:i:s")))
+            ->execute();
     }
 
     /**
@@ -77,6 +70,9 @@ class Model_Article extends Model
                 ));
         $query->execute();
     }
+
+
+
 
 }
 

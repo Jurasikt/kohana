@@ -9,7 +9,7 @@ class Model_Users extends Model
      * @return bool
      * пока нет времени делать через бд
      */
-    public function login($login,$password)
+    /*public function login($login,$password)
     {
         if ($login == 'admin' && $password == '31415926') {
             $this->setcookie();
@@ -17,13 +17,13 @@ class Model_Users extends Model
         }
         return false;
 
-    }
+    }*/
 
     /**
      * устанавливает пользователю кукис и сохраняет их 
      * значение в бд
      */
-    public function setcookie() 
+    /*public function setcookie() 
     {
         $value = Text::random('alnum',32);
         setcookie('rememberme',$value,time()+314159,'/');
@@ -31,14 +31,14 @@ class Model_Users extends Model
         else $ip = '';
         $sql = "INSERT INTO cookie (value, ip) VALUES ('$value','$ip')";
         DB::query(Database::INSERT,$sql)->execute();
-    }
+    }*/
 
     /**
      * проверяет на существования cookie в бд
      * @param  $cookie string - value cookie
      * @return bool
      */
-    public function oath($cookie = true) 
+    /*public function oath($cookie = true) 
     {
         if ($cookie == true) {
             if (isset($_COOKIE['rememberme'])) $cookie = $_COOKIE['rememberme'];
@@ -49,5 +49,5 @@ class Model_Users extends Model
                 ->param(':value',$cookie)->execute();
         if (isset($out[0]['id'])) return true;
         return false;
-    }
+    }*/
 }

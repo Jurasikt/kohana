@@ -73,8 +73,8 @@
 </div>
 
 <script type="text/javascript">
- var site = <?=URL::site()?>+'ajax/login';
- var img  = <?=URL::site()?>+'image';
+ var site = '<?=URL::site()?>'+'ajax/login';
+ var img  = '<?=URL::site()?>'+'image';
   $("#signin").click(function(event){
     $("#sign").show();
     $('body').css('overflow','hidden');
@@ -97,7 +97,7 @@ $('#btn-sign').click(function() {
     } else {
       $(".lock").hide();
       $('body').css('overflow','visible');
-      //window.location.replace(img);
+      window.location.replace(img);
     }
   },'json');
 });

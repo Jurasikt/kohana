@@ -5,14 +5,9 @@ class Controller_Welcome extends Controller {
 	public function action_index()
 	{
 		$this->response->body(View::factory('main',array(
-			'login' => Model::factory('Users')->oath(),
+			'login' => Auth::instance()->logged_in(),
 			)));
 	}
 
-	public function action_test()
-	{
-		$dat = Model::factory('Photo')->get_all();
-		$this->response->body(View::factory('main',$dat));
-	}
 
 } 
