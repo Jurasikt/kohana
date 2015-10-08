@@ -123,7 +123,7 @@ $active = 'active';
     </div>
     <?php endfor;?>
 
-
+  <?=$pgn?>
   </div>
 </div>
 
@@ -150,7 +150,7 @@ $active = 'active';
 
 </body>
 <script type="text/javascript">
-  var url = 'public/img/m_';
+  var url = '<?=URL::site()?>'+'public/img/m_';
   $('.carousel').carousel({
     interval: 6500
   });

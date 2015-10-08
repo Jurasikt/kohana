@@ -34,12 +34,17 @@ class Model_Photo extends Model
         return $name;
     }
 
-
-
-    public function get_all()
+    /**
+     * возвращает список файлов изображений 
+     * @param $offset  int смещение в запросе селект 
+     * @param $limit   int 
+     * @return         array - двумерный массив с названием файлов 
+     *                         и заглавием изображений
+     */ 
+    public function get_limit($offset,$limit = 6)
     {
         $tmp = array();
-        $sql = "SELECT * FROM ".$this->_table." WHERE 1";
+        $sql = "SELECT * FROM ".$this->_table." LIMIT ".$limit." OFFSET ".$offset;
         $arr = DB::query(Database::SELECT, $sql)->execute();
         foreach ($arr as $value) {
             $tmp[] = array(
@@ -66,7 +71,12 @@ class Model_Photo extends Model
         }
     }
 
-
+    /**
+    * возвращает имя файла и соответствующее ему название фото 
+    * случайно выбраное из бд.
+    * @param  $limit  int 
+    * @return         array
+    */
     public function rand($limit) 
     {
         $tmp = array();
@@ -77,6 +87,16 @@ class Model_Photo extends Model
             $tmp[$arr[$i]['file']] = $arr[$i]['title'];
         }
         return $tmp;
+    }
+
+    /**
+    * возвращает суммарное число изображений в бд
+    * @return int
+    */
+    public function count()
+    {
+        $sql = "SELECT count(*) FROM ".$this->_table;
+        return (int)DB::query(Database::SELECT,$sql)->execute()[0]["count(*)"];
     }
 
 }

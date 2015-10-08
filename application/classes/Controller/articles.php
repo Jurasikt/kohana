@@ -10,6 +10,7 @@ class Controller_Articles extends Controller {
         if (Auth::instance()->logged_in()) {
             $id = $this->request->param('id');
             if ($id != '') {
+                $id = preg_replace('/id/','', $id);
                 $arr = Model::factory('Article')->get_text($id);
                 ($arr == false)?$this->response->body('Такой статьи не существует :D'):
                     $this->response->body(View::factory('rart',$arr));
@@ -83,7 +84,7 @@ class Controller_Articles extends Controller {
 
     public function action_test()
     {
-       var_dump( File::mime('d:\Working_Group\canon_photo\2015_photo\tmp\_MG_0898.txt'));
+        
     }
 
 
