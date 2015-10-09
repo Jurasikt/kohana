@@ -57,7 +57,7 @@
   <div class="col-md-8">
   <?php foreach ($all as $id => $title) :?>
     <li>
-      <a href="articles/id<?=$id?>"><?=$title?></a>
+      <a href="<?=URL::site().'articles/'.$id?>"><?=$title?></a>
     </li>
   <?php endforeach; ?>
   </div>

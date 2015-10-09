@@ -156,16 +156,11 @@ Route::set('image', 'image(/<page>)', array('page' => '[0-9]+'))
         ));
 
 
-Route::set('write_article', 'articles(/<action>(/<id>))', array('action' => 'write|edit|save|test'))
+Route::set('articles', 'articles(/<id>)', array('id' => '[0-9]+$'))
         ->defaults(array(
             'controller' => 'articles',
-            'action'     => 'index',        
-    ));
-
-Route::set('articles', 'articles(/<id>)', array('id' => 'id[0-9]+$'))
-        ->defaults(array(
-            'controller' => 'articles',
-            'action'     => 'index',        
+            'action'     => 'index', 
+            'id'         => '',    
     ));
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
@@ -173,6 +168,3 @@ Route::set('default', '(<controller>(/<action>(/<id>)))')
         'controller' => 'welcome',
         'action'     => 'index',
     ));
-
-
-

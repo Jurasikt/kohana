@@ -9,7 +9,7 @@ class Model_Article extends Model
     * @param   $title   string  заглавиее
     * @param   $text    string  art.
     */
-    public function save_all($title='',$text='')
+    public function save_item($title='',$text='')
     {
         DB::insert($this->_table, array('text','title','user','date'))
             ->values(array($text,$title,1,date("Y-m-d H:i:s")))
@@ -18,57 +18,64 @@ class Model_Article extends Model
 
     /**
     * возвращает массив всех статьей 
-    * @return  array of array 
+    * @return  array of array если таблица пуста то пустой массив
     */
-    public function get_all()
+    public function get_items()
     {
-        $tmp = array();
-        $sql = "SELECT * FROM ".$this->_table." WHERE 1";
-        $arr = DB::query(Database::SELECT, $sql)->execute();
-        for ($i=0; $i < count($arr) ; $i++) { 
-            $tmp[$arr[$i]['id']] = $arr[$i]['title'];
-        }
-        return $tmp;
+        $items = DB::select()
+            ->from($this->_table)
+            ->execute()
+            ->as_array('id','title');
+        return $items;
     }
 
     /**
     * возращает массив с текстом публикации и его наз-
-    * ванием, принимает йдишник статьи  
+    * ванием, принимает айдишник статьи  
     * @return   array 
     */
-    public function get_text($id)
+    public function get_item_by_id($id)
     {
-        $sql = "SELECT * FROM ".$this->_table." WHERE id = :id";
-        $arr = DB::query(Database::SELECT, $sql)
-            ->param(':id',$id)->execute();
-        if (isset($arr[0]) && isset($arr[0]['id'])) {
-            $out = array(
-                    'title' => $arr[0]['title'],
-                    'text'  => $arr[0]['text'],
-                    'id'    => $arr[0]['id']
-                );
-            return $out;            
-        }
-        return false;
+        $item = DB::select()
+            ->from($this->_table)
+            ->where('id','=',$id)
+            ->execute()
+            ->current();
+        return (count($item) == 0)?false:
+            array(
+                'title'=>$item['title'],
+                'text'=> $item['text'],
+                'id'=>$item['id']
+            );
     }
 
-    public function delete($id)
+    /**
+    * удаляет стаью 
+    * @param $id   int 
+    */
+    public function delete_item($id)
     {
-        $sql = "DELETE FROM ".$this->_table." WHERE id = :id";
-        DB::query(Database::DELETE,$sql)
-            ->param(':id',$id)->execute();
+        DB::delete($this->_table)
+            ->where('id','=',$id)
+            ->execute();
     }
 
-    public function update($id,$title,$text)
+
+    /**
+    * обновляет содержимое статьи 
+    * @param  $id    int      
+    * @param  $title string новое заглавие 
+    * @param  $text  string содержание статьи  
+    */
+    public function update_item($id,$title,$text)
     {
-        $sql = "UPDATE ".$this->_table." SET text = :text, title = :title WHERE id = :id";
-        $query = DB::query(Database::UPDATE,$sql)
-            ->parameters(array(
-                ':text' => $text,
-                ':id'   =>$id,
-                ':title'=>$title,
-                ));
-        $query->execute();
+        DB::update($this->_table)
+            ->set(array(
+                'text' => $text,
+                'title'=>$title,
+                ))
+            ->where('id','=',$id)
+            ->execute();
     }
 
 

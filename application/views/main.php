@@ -91,8 +91,8 @@ $('#btn-sign').click(function() {
   $.post(site,form,function(json){
     $('.form-error').html(''); 
     if (json.success == false) {
-      for (var i = json.err.length - 1; i >= 0; i--) {
-        $('.form-error').append('<li> '+json.err[i]+'</li>');
+      for (var i = json.error.length - 1; i >= 0; i--) {
+        $('.form-error').append('<li> '+json.error[i]+'</li>');
       };      
     } else {
       $(".lock").hide();

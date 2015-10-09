@@ -67,8 +67,8 @@
   <div class="zero-50"></div>
   <div class="form-group">
       <div class="zero-50"></div>
-      <button type="submit" class="btn btn-success" name = "edit">Edit</button>
-      <button type="submit" class="btn btn-danger" name = "delete" >Delete</button>
+      <button type="submit" class="btn btn-success" name = "edit" value = "edit">Edit</button>
+      <button type="submit" class="btn btn-danger" name = "delete" value = "delete">Delete</button>
     </div>
     
   </div>
