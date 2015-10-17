@@ -18,19 +18,33 @@ class Controller_Upload extends Controller {
         if (!Auth::instance()->logged_in()) {
             throw new HTTP_Exception_401();
         }
-        if (isset($_FILES['file']['tmp_name']) && $_FILES['file']['error'][0] == 0) {
-            $name = array();
-            for ($i=0; $i < count($_FILES['file']['tmp_name']) ; $i++) { 
-                if ($_FILES['file']['type'][$i] != File::mime_by_ext('jpg')) continue;
-                $tmp = Model::factory('Photo')->load($_FILES['file']['tmp_name'][$i]);
-                if ($tmp !== false) $name[] = $tmp;
-            }
-            $this->response->body(View::factory('upl2',array(
-                'name' =>$name,
-                )));
-        } else {
+        if (!isset($_FILES['file'])) {
             throw new HTTP_Exception_500();
         }
+        $images = array();
+        foreach ($_FILES['file'] as $key => $value) {
+            $i = 0;
+            foreach ($value as $item) {
+                if (!isset($images[$i])) {
+                    $images[$i] = array();
+                }
+                $images[$i][$key] = $item;
+                $i++;
+            }
+        }
+        $name = array();
+        foreach ($images as $item) {
+            $tmp = Model::factory('Photo')->load($item);
+            if ($tmp != false) {
+                $name[] = $tmp;
+            }
+        }
+        if (count($name) == 0) {
+            throw new HTTP_Exception_500();
+        }
+        $this->response->body(View::factory('upl2',array(
+            'name' =>$name,
+            )));
     }
 
 

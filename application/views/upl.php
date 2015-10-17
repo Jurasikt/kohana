@@ -53,10 +53,12 @@
   <div class="container">
     <h2 class="headers"> Загрузка фото (допустимый формат jpg.) </h2>
     <form action="<?=URL::base()?>upload/next" method="post" enctype="multipart/form-data">
-    <input type="file" min="1" max="10" name="file[]" multiple="true" > <br>
+    <input type="file"  min="1" max="10" multiple="true" name="file[]"> <br>
     <input type="submit" value="Загрузить" class="btn"><br>
     </form>   
   </div>
 
 </body>
 </html>
+
+<!-- min="1" max="10" multiple="true"-->

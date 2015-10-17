@@ -12,26 +12,38 @@ class Model_Photo extends Model
 
 
     /**
-    * осуществляет проверку загружаемого изображения на jpg(jpeg) если $exif == true
+    * осуществляет проверку загружаемого изображения на jpg(jpeg)
     * копирует его в католог img, предварительно 
     * изменив размер до s - max(300*300) m  - max(800*800) схранив пропорции
     * @param $file    string  полное имя файла 
-    * @param $exif    bool    если true то проверка будет осуществляться по exif
     * @return         mixed new file name or false(boolean)
     */
-    public function load($file, $exif = true) 
+    public function load($file,$id = '') 
     {
-        if ($exif && function_exists('exif_imagetype') && exif_imagetype($file) != 2)
+
+        if (
+            !Upload::valid($file) ||
+            !Upload::not_empty($file) ||
+            !Upload::type($file, array('jpg', 'jpeg'))
+            ) {
             return false;
-        $name = Text::random('alnum',32).'.jpg';
+        }
         $dir  = DOCROOT.self::IMAGE_DIR;
-        Image::factory($file)
-            ->resize(300, 300, Image::AUTO)
-            ->save($dir.'s_'.$name);
-        Image::factory($file)
-            ->resize(800, 800, Image::AUTO)
-            ->save($dir.'m_'.$name);
-        return $name;
+        if ($image = Upload::save($file, NULL, $dir)) {
+            if ($id == '') {
+                $id = Text::random('alnum',32);
+            }
+            $name = $id.'.jpg';
+            Image::factory($image)
+                ->resize(300, 300, Image::AUTO)
+                ->save($dir.'s_'.$name);
+            Image::factory($image)
+                ->resize(800, 800, Image::AUTO)
+                ->save($dir.'m_'.$name);
+            unlink($image);
+            return $name;       
+        }
+        return false;
     }
 
     /**
